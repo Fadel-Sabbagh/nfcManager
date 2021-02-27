@@ -31,11 +31,11 @@ import java.nio.charset.StandardCharsets
 class MainActivity : BaseActivity() {
 
     private var adapter: NfcAdapter? = null
-    var tag: WritableTag? = null
-    var tagId: String? = null
+    private var tag: WritableTag? = null
+    private var tagId: String? = null
     lateinit var db: AppDatabase
-    var balance1 = Balance(1, "Food", 10.0)
-    var balance2 = Balance(2, "Clothes", 20.0)
+    private var balance1 = Balance(1, "Food", 10.0)
+    private var balance2 = Balance(2, "Clothes", 20.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
