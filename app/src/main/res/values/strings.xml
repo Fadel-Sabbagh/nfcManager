@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NFC Manager</string>
+    <string name="read_tag">Tap NFC tag to read balances!!</string>
+    <string name="network_error">Network Error!</string>
+    <string name="exchange_rates">Exchange Rates</string>
+    <string name="cut_usd_from_first_balance">Cut 2 USD from First Balance</string>
+    <string name="cut_usd_from_second_balance">Cut 5 USD from Second Balance</string>
+    <string name="reset_balances">Reset Balances</string>
+    <string name="unsupported_tag_tapped">Unsupported tag tapped</string>
+    <string name="parsing_error">Balance parsing Error!</string>
+    <string name="ndef_formatable_card">Ndef Formatable Card : You can write balances</string>
+</resources>
