@@ -184,6 +184,13 @@ class MainActivity : BaseActivity() {
                             try
                             {
                                 val balance: Balance = gson.fromJson(payLoadGson, Balance::class.java)
+                                if (balance.balanceNo == 1)
+                                {
+                                    balance1.balanceAmount = balance.balanceAmount
+                                }else if (balance.balanceNo == 2)
+                                {
+                                    balance2.balanceAmount = balance.balanceAmount
+                                }
                                 Toast.makeText(this, balance.balanceName + " : " + balance.balanceAmount.toString(), Toast.LENGTH_SHORT).show()
                             }catch (ex: Exception)
                             {
