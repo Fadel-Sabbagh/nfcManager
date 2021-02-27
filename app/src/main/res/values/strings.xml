@@ -9,4 +9,6 @@
     <string name="unsupported_tag_tapped">Unsupported tag tapped</string>
     <string name="parsing_error">Balance parsing Error!</string>
     <string name="ndef_formatable_card">Ndef Formatable Card : You can write balances</string>
+    <string name="nfc_not_enabled">NFC not enabled (Pleae enable it from android device settings)</string>
+    <string name="nfc_not_found">NFC not supported</string>
 </resources>

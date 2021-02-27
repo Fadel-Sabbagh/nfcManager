@@ -58,12 +58,14 @@ class WritableTag @Throws(FormatException::class) constructor(tag: Tag) {
             ndef.connect()
             if (ndef.isConnected) {
                 ndef.writeNdefMessage(message)
+                ndef.close()
                 return true
             }
         } else if (ndefFormatable != null) {
             ndefFormatable.connect()
             if (ndefFormatable.isConnected) {
                 ndefFormatable.format(message)
+                ndefFormatable.close()
                 return true
             }
         }

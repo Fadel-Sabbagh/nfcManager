@@ -46,7 +46,7 @@ class MainActivity : BaseActivity() {
         AsyncTask.execute { // Insert Data
             var transactions = db.transactionDao().getAll()
             runOnUiThread {
-                Toast.makeText(this,"Transactions count in db : " + transactions.size.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Transactions count in db : " + transactions.size.toString(),Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -63,26 +63,26 @@ class MainActivity : BaseActivity() {
         ExchangeRatesApi.instance.GetRates().enqueue(object : Callback<ExchangeRates> {
             override fun onResponse(call: Call<ExchangeRates>, response: Response<ExchangeRates>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@MainActivity,"EUR to USD rate : " + response.body()!!.rates.usd.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity,"EUR to USD rate : " + response.body()!!.rates.usd.toString(), Toast.LENGTH_SHORT).show()
                     AsyncTask.execute { // Insert Data
                         var transaction = AppTransaction(0, balance.balanceNo, balance.balanceAmount,balance.balanceAmount - amount,(balance.balanceAmount - amount) * response.body()!!.rates.usd,response.body()!!.rates.usd)
                         db.transactionDao().insertAll(transaction)
                         runOnUiThread {
-                            Toast.makeText(this@MainActivity,"Transaction has beend added successfully", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@MainActivity,"Transaction has beend added successfully", Toast.LENGTH_SHORT).show()
                             balance.balanceAmount -= amount
                             updateBalancesOnCard()
                         }
                     }
 
                 } else {
-                    Toast.makeText(this@MainActivity, response.message(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, response.message(), Toast.LENGTH_SHORT).show()
                 }
                 hud.dismiss()
             }
 
             override fun onFailure(call: Call<ExchangeRates>, t: Throwable) {
                 hud.dismiss()
-                Toast.makeText(this@MainActivity, R.string.network_error, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, R.string.network_error, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -90,6 +90,12 @@ class MainActivity : BaseActivity() {
     private fun initNfcAdapter() {
         val nfcManager = getSystemService(Context.NFC_SERVICE) as NfcManager
         adapter = nfcManager.defaultAdapter
+        if (adapter == null) {
+            Toast.makeText(this,R.string.nfc_not_found,Toast.LENGTH_SHORT).show()
+        }else if (!adapter!!.isEnabled())
+        {
+            Toast.makeText(this,R.string.nfc_not_enabled,Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initViews() {
@@ -101,7 +107,7 @@ class MainActivity : BaseActivity() {
             if (balance2.balanceAmount >= 5) {
                 callEcchangeRatesApi(balance2,5.0)
             } else {
-                Toast.makeText(this, "", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
             }
         }
         cut_2.setOnClickListener {
@@ -109,14 +115,13 @@ class MainActivity : BaseActivity() {
             if (balance1.balanceAmount >= 2) {
                 callEcchangeRatesApi(balance1,2.0)
             } else {
-                Toast.makeText(this, "", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun resetAccountBalances() {
-        balance1.balanceAmount = 10.0
-        balance2.balanceAmount = 20.0
+        resetBalances()
         updateBalancesOnCard()
     }
 
@@ -179,24 +184,31 @@ class MainActivity : BaseActivity() {
                             try
                             {
                                 val balance: Balance = gson.fromJson(payLoadGson, Balance::class.java)
-                                Toast.makeText(this, balance.balanceName + " : " + balance.balanceAmount.toString(), Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, balance.balanceName + " : " + balance.balanceAmount.toString(), Toast.LENGTH_SHORT).show()
                             }catch (ex: Exception)
                             {
-                                Toast.makeText(this, R.string.parsing_error, Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, R.string.parsing_error, Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
                 }else
                 {
-                    Toast.makeText(this, R.string.ndef_formatable_card, Toast.LENGTH_LONG).show()
+                    resetBalances()
+                    Toast.makeText(this, R.string.ndef_formatable_card, Toast.LENGTH_SHORT).show()
                 }
             }else
             {
-                Toast.makeText(this, R.string.unsupported_tag_tapped, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.unsupported_tag_tapped, Toast.LENGTH_SHORT).show()
             }
         } catch (e: FormatException) {
             Log.e(getTag(), getString(R.string.unsupported_tag_tapped), e)
             return
         }
+    }
+
+    fun resetBalances()
+    {
+        balance1.balanceAmount = 10.0
+        balance2.balanceAmount = 20.0
     }
 }
