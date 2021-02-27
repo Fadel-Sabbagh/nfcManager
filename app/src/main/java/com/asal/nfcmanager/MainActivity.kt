@@ -34,8 +34,8 @@ class MainActivity : BaseActivity() {
     private var tag: WritableTag? = null
     private var tagId: String? = null
     lateinit var db: AppDatabase
-    private var balance1 = Balance(1, "Food", 10.0)
-    private var balance2 = Balance(2, "Clothes", 20.0)
+    private var balance1 = Balance(1, "Food", 0.0)
+    private var balance2 = Balance(2, "Clothes", 0.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -200,6 +200,8 @@ class MainActivity : BaseActivity() {
                     }
                 }else
                 {
+                    balance1.balanceAmount = 0.0
+                    balance2.balanceAmount = 0.0
                     Toast.makeText(this, R.string.ndef_formatable_card, Toast.LENGTH_SHORT).show()
                 }
             }else
