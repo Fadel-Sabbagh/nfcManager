@@ -11,4 +11,6 @@
     <string name="ndef_formatable_card">Ndef Formatable Card : You can write balances</string>
     <string name="nfc_not_enabled">NFC not enabled (Pleae enable it from android device settings)</string>
     <string name="nfc_not_found">NFC not supported</string>
+    <string name="not_enough_balance">Not enough balance</string>
+
 </resources>

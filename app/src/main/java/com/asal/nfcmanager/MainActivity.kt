@@ -71,13 +71,13 @@ class MainActivity : BaseActivity() {
                             Toast.makeText(this@MainActivity,"Transaction has beend added successfully", Toast.LENGTH_SHORT).show()
                             balance.balanceAmount -= amount
                             updateBalancesOnCard()
+                            hud.dismiss()
                         }
                     }
-
                 } else {
+                    hud.dismiss()
                     Toast.makeText(this@MainActivity, response.message(), Toast.LENGTH_SHORT).show()
                 }
-                hud.dismiss()
             }
 
             override fun onFailure(call: Call<ExchangeRates>, t: Throwable) {
@@ -107,7 +107,7 @@ class MainActivity : BaseActivity() {
             if (balance2.balanceAmount >= 5) {
                 callEcchangeRatesApi(balance2,5.0)
             } else {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.not_enough_balance, Toast.LENGTH_SHORT).show()
             }
         }
         cut_2.setOnClickListener {
@@ -115,7 +115,7 @@ class MainActivity : BaseActivity() {
             if (balance1.balanceAmount >= 2) {
                 callEcchangeRatesApi(balance1,2.0)
             } else {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.not_enough_balance, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -193,7 +193,6 @@ class MainActivity : BaseActivity() {
                     }
                 }else
                 {
-                    resetBalances()
                     Toast.makeText(this, R.string.ndef_formatable_card, Toast.LENGTH_SHORT).show()
                 }
             }else

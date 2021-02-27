@@ -13,6 +13,7 @@
         android:gravity="center"
         android:layout_margin="12dp"
         android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
         android:text="@string/cut_usd_from_first_balance" />
 
     <Button
@@ -22,6 +23,7 @@
         android:gravity="center"
         android:layout_margin="12dp"
         android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:text="@string/cut_usd_from_second_balance" />
 
     <Button
@@ -31,6 +33,7 @@
         android:gravity="center"
         android:layout_margin="12dp"
         android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
         android:text="@string/reset_balances" />
 
     <TextView
