@@ -121,7 +121,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun resetAccountBalances() {
-        resetBalances()
+        chargeBalances()
         updateBalancesOnCard()
     }
 
@@ -200,8 +200,7 @@ class MainActivity : BaseActivity() {
                     }
                 }else
                 {
-                    balance1.balanceAmount = 0.0
-                    balance2.balanceAmount = 0.0
+                    resetBalances()
                     Toast.makeText(this, R.string.ndef_formatable_card, Toast.LENGTH_SHORT).show()
                 }
             }else
@@ -214,9 +213,15 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun resetBalances()
+    fun chargeBalances()
     {
         balance1.balanceAmount = 10.0
         balance2.balanceAmount = 20.0
+    }
+
+    fun resetBalances()
+    {
+        balance1.balanceAmount = 0.0
+        balance2.balanceAmount = 0.0
     }
 }
